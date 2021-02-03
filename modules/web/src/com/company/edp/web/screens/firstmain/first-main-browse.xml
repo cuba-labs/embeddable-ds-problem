@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://firstMainBrowse.caption"
+        class="com.company.edp.web.screens.firstmain.FirstMainBrowse"
+        focusComponent="firstMainsTable"
+        lookupComponent="firstMainsTable"
+        messagesPack="com.company.edp.web.screens.firstmain">
+    <dsContext>
+        <groupDatasource id="firstMainsDs"
+                         class="com.company.edp.entity.FirstMain"
+                         view="firstMain-view">
+            <query>
+                <![CDATA[select e from edp$FirstMain e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="firstMainsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="firstMainsTable"
+                datasource="firstMainsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="firstMainsTable"
+                    width="100%">
+            <actions>
+                <action id="create"
+                        openType="NEW_TAB"/>
+                <action id="edit"
+                        openType="NEW_TAB"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="embeddedEntity.firstAttr"/>
+                <column id="embeddedEntity.secondAttr"/>
+            </columns>
+            <rows datasource="firstMainsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="firstMainsTable.create"/>
+                <button id="editBtn" action="firstMainsTable.edit"/>
+                <button id="removeBtn" action="firstMainsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>
